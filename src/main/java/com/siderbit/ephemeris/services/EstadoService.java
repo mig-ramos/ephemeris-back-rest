@@ -1,6 +1,6 @@
 package com.siderbit.ephemeris.services;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,7 @@ public class EstadoService {
 	@Autowired
 	private EstadoRepository repo;
 	
-	public Estado find(Integer id) {
-		Optional<Estado> obj = repo.findById(id);
-		return obj.orElse(null);
-	}	
+	public List<Estado> findAll() {
+		return repo.findAllByOrderByNome();
+	}
 }
