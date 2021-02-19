@@ -9,17 +9,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.siderbit.ephemeris.domains.Estado;
 import com.siderbit.ephemeris.domains.Hora;
+import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.repositories.EstadoRepository;
 import com.siderbit.ephemeris.repositories.HoraRepository;
+import com.siderbit.ephemeris.repositories.TipoConsultaRepository;
 
 @SpringBootApplication
 public class EphemerisApplication implements CommandLineRunner {
 	
 	@Autowired
-	EstadoRepository estadoRepository;
-	
+	EstadoRepository estadoRepository;	
 	@Autowired
 	HoraRepository horaRepository;
+	@Autowired
+	TipoConsultaRepository tipoConsultaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EphemerisApplication.class, args);
@@ -54,10 +57,15 @@ public class EphemerisApplication implements CommandLineRunner {
 		Hora hr20 = new Hora(null, "16:30");		
 		Hora hr21 = new Hora(null, "17:00");
 		
+		TipoConsulta tipoCon1 = new TipoConsulta(null, "Consulta");
+		TipoConsulta tipoCon2 = new TipoConsulta(null, "Retorno");
+		
 		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
 		
 		horaRepository.saveAll(Arrays.asList(hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, 
 				hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21));
+		
+		tipoConsultaRepository.saveAll(Arrays.asList(tipoCon1, tipoCon2));
 		
 	}
 
