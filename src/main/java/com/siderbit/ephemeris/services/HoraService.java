@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.siderbit.ephemeris.domains.Hora;
 import com.siderbit.ephemeris.repositories.HoraRepository;
+import com.siderbit.ephemeris.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class HoraService {
@@ -16,6 +17,7 @@ public class HoraService {
 	
 	public Hora find(Integer id) {
 		Optional<Hora> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + ", Tipo: "
+		+ Hora.class.getName()));
 	}	
 }
