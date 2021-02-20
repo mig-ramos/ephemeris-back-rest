@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,7 +29,8 @@ public class Usuario implements Serializable {
 	private String cpfOuCnpj;
 	private Date instante;
 	
-	@OneToMany(mappedBy="cliente")
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection

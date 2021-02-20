@@ -1,4 +1,4 @@
-package com.siderbit.ephemeris.domains;
+ package com.siderbit.ephemeris.domains;
 
 import java.io.Serializable;
 
@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +20,7 @@ public class Cidade implements Serializable {
 	private Integer id;
 	private String nome;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="estado_id")
 	private Estado estado;
