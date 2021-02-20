@@ -8,13 +8,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.siderbit.ephemeris.domains.Cidade;
+import com.siderbit.ephemeris.domains.Endereco;
 import com.siderbit.ephemeris.domains.Estado;
 import com.siderbit.ephemeris.domains.Hora;
 import com.siderbit.ephemeris.domains.TipoConsulta;
+import com.siderbit.ephemeris.domains.Usuario;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
+import com.siderbit.ephemeris.repositories.EnderecoRepository;
 import com.siderbit.ephemeris.repositories.EstadoRepository;
 import com.siderbit.ephemeris.repositories.HoraRepository;
 import com.siderbit.ephemeris.repositories.TipoConsultaRepository;
+import com.siderbit.ephemeris.repositories.UsuarioRepository;
 
 @SpringBootApplication
 public class EphemerisApplication implements CommandLineRunner {
@@ -27,6 +31,10 @@ public class EphemerisApplication implements CommandLineRunner {
 	TipoConsultaRepository tipoConsultaRepository;
 	@Autowired
 	CidadeRepository cidadeRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EphemerisApplication.class, args);
@@ -48,6 +56,17 @@ public class EphemerisApplication implements CommandLineRunner {
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", null);
+		
+		usu1.getTelefones().addAll(Arrays.asList("118986745", "13991356754"));
+		
+		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",usu1,c3);
+		
+		usu1.getEnderecos().addAll(Arrays.asList(e1));
+		
+		usuarioRepository.saveAll(Arrays.asList(usu1));
+		enderecoRepository.saveAll(Arrays.asList(e1));
 		
 		Hora hr1 = new Hora(null, "07:00");
 		Hora hr2 = new Hora(null, "07:30");
