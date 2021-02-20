@@ -1,5 +1,6 @@
 package com.siderbit.ephemeris;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class EphemerisApplication implements CommandLineRunner {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	public static void main(String[] args) {
 		SpringApplication.run(EphemerisApplication.class, args);
@@ -57,7 +60,7 @@ public class EphemerisApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", null);
+		Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", sdf.parse("20/02/2021 00:00"));
 		
 		usu1.getTelefones().addAll(Arrays.asList("118986745", "13991356754"));
 		
