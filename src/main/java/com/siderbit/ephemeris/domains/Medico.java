@@ -4,11 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Medico extends Usuario {
 	private static final long serialVersionUID = 1L;
 
 	private String crm;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataInscricao;
 	
 	public Medico() {
