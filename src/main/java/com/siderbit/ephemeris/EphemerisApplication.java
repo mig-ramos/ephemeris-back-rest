@@ -12,6 +12,8 @@ import com.siderbit.ephemeris.domains.Cidade;
 import com.siderbit.ephemeris.domains.Endereco;
 import com.siderbit.ephemeris.domains.Estado;
 import com.siderbit.ephemeris.domains.Hora;
+import com.siderbit.ephemeris.domains.Medico;
+import com.siderbit.ephemeris.domains.Paciente;
 import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.domains.Usuario;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
@@ -60,16 +62,20 @@ public class EphemerisApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", sdf.parse("20/02/2021 00:00"));
+		Usuario paci1 = new Paciente(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", sdf.parse("20/02/2021 00:00"), sdf.parse("14/05/1959 00:00"));
+		paci1.getTelefones().addAll(Arrays.asList("118986745"));
 		
-		usu1.getTelefones().addAll(Arrays.asList("118986745", "13991356754"));
+		Usuario medi1 = new Medico(null, "Médico Ephemeris", "m.ephemeris@gmail.com", "743678216", sdf.parse("21/02/2021 00:00"),"456356",sdf.parse("20/02/2021 00:00"));
+		paci1.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
 		
-		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",usu1,c3);
+		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",paci1,c3);
+		Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",medi1,c2);
 		
-		usu1.getEnderecos().addAll(Arrays.asList(e1));
+		paci1.getEnderecos().addAll(Arrays.asList(e1));
+		medi1.getEnderecos().addAll(Arrays.asList(e2));
 		
-		usuarioRepository.saveAll(Arrays.asList(usu1));
-		enderecoRepository.saveAll(Arrays.asList(e1));
+		usuarioRepository.saveAll(Arrays.asList(paci1, medi1));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
 		Hora hr1 = new Hora(null, "07:00");
 		Hora hr2 = new Hora(null, "07:30");
