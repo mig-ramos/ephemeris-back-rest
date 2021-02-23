@@ -72,7 +72,10 @@ public class EphemerisApplication implements CommandLineRunner {
 		Especialidade esp1 = new Especialidade(null, "Dentista");
 		Especialidade esp2 = new Especialidade(null, "Clínico Geral");
 		Especialidade esp3 = new Especialidade(null, "Geriatra");
-		Especialidade esp4 = new Especialidade(null, "Otorrino");		
+		Especialidade esp4 = new Especialidade(null, "Otorrino");	
+		Especialidade esp5 = new Especialidade(null, "Pediatra");
+		Especialidade esp6 = new Especialidade(null, "Dermatologista");
+		Especialidade esp7 = new Especialidade(null, "Cirurgial Geral");		
 		
 		
 		Medico medi1 = new Medico(null, "Médico Ephemeris", "m.ephemeris@gmail.com", "743678216", sdf.parse("21/02/2021 00:00"),"456356",sdf.parse("20/02/2021 00:00"));
@@ -81,7 +84,7 @@ public class EphemerisApplication implements CommandLineRunner {
 		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",paci1,c3);
 		Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",medi1,c2);
 		
-		especialidadeRepository.saveAll(Arrays.asList(esp1, esp2, esp3, esp4));
+		especialidadeRepository.saveAll(Arrays.asList(esp1, esp2, esp3, esp4, esp5, esp6, esp7));
 		paci1.getEnderecos().addAll(Arrays.asList(e1));
 		medi1.getEnderecos().addAll(Arrays.asList(e2));
 		
