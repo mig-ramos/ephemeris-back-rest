@@ -3,6 +3,8 @@ package com.siderbit.ephemeris.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.siderbit.ephemeris.domains.Especialidade;
+import com.siderbit.ephemeris.dto.EspecialidadeDTO;
 import com.siderbit.ephemeris.repositories.EspecialidadeRepository;
 import com.siderbit.ephemeris.services.exceptions.DataIntegrityException;
 import com.siderbit.ephemeris.services.exceptions.ObjectNotFoundException;
@@ -53,5 +56,9 @@ public class EspecialidadeService {
 	public Page<Especialidade> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+
+	public Especialidade fromDTO(@Valid EspecialidadeDTO objDto) {
+		return new Especialidade(objDto.getId(), objDto.getNome());
 	}
 }
