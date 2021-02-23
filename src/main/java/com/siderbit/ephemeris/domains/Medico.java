@@ -1,8 +1,13 @@
 package com.siderbit.ephemeris.domains;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,6 +19,10 @@ public class Medico extends Usuario {
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataInscricao;
+	
+	@ManyToMany
+	@JoinTable(name = "especialidade_medico", joinColumns = @JoinColumn(name = "medico_id"))
+	private Set<Especialidade> especialidades = new HashSet<>();
 	
 	public Medico() {
 	}
@@ -38,5 +47,9 @@ public class Medico extends Usuario {
 
 	public void setDataInscricao(Date dataInscricao) {
 		this.dataInscricao = dataInscricao;
+	}
+
+	public Set<Especialidade> getEspecialidades() {
+		return especialidades;
 	}	
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.siderbit.ephemeris.domains.Cidade;
 import com.siderbit.ephemeris.domains.Endereco;
+import com.siderbit.ephemeris.domains.Especialidade;
 import com.siderbit.ephemeris.domains.Estado;
 import com.siderbit.ephemeris.domains.Hora;
 import com.siderbit.ephemeris.domains.Medico;
@@ -18,6 +19,7 @@ import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.domains.Usuario;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
 import com.siderbit.ephemeris.repositories.EnderecoRepository;
+import com.siderbit.ephemeris.repositories.EspecialidadeRepository;
 import com.siderbit.ephemeris.repositories.EstadoRepository;
 import com.siderbit.ephemeris.repositories.HoraRepository;
 import com.siderbit.ephemeris.repositories.TipoConsultaRepository;
@@ -38,6 +40,8 @@ public class EphemerisApplication implements CommandLineRunner {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private EspecialidadeRepository especialidadeRepository;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -65,17 +69,29 @@ public class EphemerisApplication implements CommandLineRunner {
 		Usuario paci1 = new Paciente(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", sdf.parse("20/02/2021 00:00"), sdf.parse("14/05/1959 00:00"));
 		paci1.getTelefones().addAll(Arrays.asList("118986745"));
 		
-		Usuario medi1 = new Medico(null, "Médico Ephemeris", "m.ephemeris@gmail.com", "743678216", sdf.parse("21/02/2021 00:00"),"456356",sdf.parse("20/02/2021 00:00"));
+		Especialidade esp1 = new Especialidade(null, "Dentista");
+		Especialidade esp2 = new Especialidade(null, "Clínico Geral");
+		Especialidade esp3 = new Especialidade(null, "Geriatra");
+		Especialidade esp4 = new Especialidade(null, "Otorrino");		
+		
+		
+		Medico medi1 = new Medico(null, "Médico Ephemeris", "m.ephemeris@gmail.com", "743678216", sdf.parse("21/02/2021 00:00"),"456356",sdf.parse("20/02/2021 00:00"));
 		paci1.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
 		
 		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",paci1,c3);
 		Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",medi1,c2);
 		
+		especialidadeRepository.saveAll(Arrays.asList(esp1, esp2, esp3, esp4));
 		paci1.getEnderecos().addAll(Arrays.asList(e1));
 		medi1.getEnderecos().addAll(Arrays.asList(e2));
 		
+		medi1.getEspecialidades().add(esp3);
+		medi1.getEspecialidades().add(esp2);
+		
 		usuarioRepository.saveAll(Arrays.asList(paci1, medi1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		
+		
 		
 		Hora hr1 = new Hora(null, "07:00");
 		Hora hr2 = new Hora(null, "07:30");
@@ -100,13 +116,14 @@ public class EphemerisApplication implements CommandLineRunner {
 		Hora hr21 = new Hora(null, "17:00");
 		
 		TipoConsulta tipoCon1 = new TipoConsulta(null, "Consulta");
-		TipoConsulta tipoCon2 = new TipoConsulta(null, "Retorno");
-		
+		TipoConsulta tipoCon2 = new TipoConsulta(null, "Retorno");		
 				
 		horaRepository.saveAll(Arrays.asList(hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, 
 				hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21));
 		
 		tipoConsultaRepository.saveAll(Arrays.asList(tipoCon1, tipoCon2));
+		
+
 		
 	}
 
