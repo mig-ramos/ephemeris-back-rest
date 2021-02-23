@@ -11,18 +11,23 @@ import com.siderbit.ephemeris.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class EspecialidadeService {
-	
+
 	@Autowired
 	private EspecialidadeRepository repo;
-	
+
 	public Especialidade find(Integer id) {
 		Optional<Especialidade> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + ", Tipo: "
-		+ Especialidade.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + ", Tipo: " + Especialidade.class.getName()));
 	}
 
 	public Especialidade insert(Especialidade obj) {
 		obj.setId(null);
 		return repo.save(obj);
-	}	
+	}
+
+	public Especialidade update(Especialidade obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
 }
