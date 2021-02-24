@@ -27,8 +27,8 @@ public class Medico extends Usuario {
 	public Medico() {
 	}
 
-	public Medico(Integer id, String nome, String email, String cpfOuCnpj, Date instante,String crm, Date dataInscricao) {
-		super(id, nome, email, cpfOuCnpj, instante);
+	public Medico(String crm, Date dataInscricao) {
+		super();
 		this.crm = crm;
 		this.dataInscricao = dataInscricao;
 	}

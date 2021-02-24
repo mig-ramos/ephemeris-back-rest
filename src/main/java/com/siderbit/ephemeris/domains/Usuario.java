@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Usuario implements Serializable {
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,8 +33,7 @@ public abstract class Usuario implements Serializable {
 	
 	@Column(unique=true)
 	private String email;
-	private String cpfOuCnpj;
-	
+		
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
@@ -49,12 +48,11 @@ public abstract class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(Integer id, String nome, String email, String cpfOuCnpj, Date instante) {
+	public Usuario(Integer id, String nome, String email, Date instante) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.cpfOuCnpj = cpfOuCnpj;
 		this.instante = instante;
 	}
 
@@ -80,14 +78,6 @@ public abstract class Usuario implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCpfOuCnpj() {
-		return cpfOuCnpj;
-	}
-
-	public void setCpfOuCnpj(String cpfOuCnpj) {
-		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public Date getInstante() {

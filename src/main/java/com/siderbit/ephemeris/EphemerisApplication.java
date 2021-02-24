@@ -13,8 +13,6 @@ import com.siderbit.ephemeris.domains.Endereco;
 import com.siderbit.ephemeris.domains.Especialidade;
 import com.siderbit.ephemeris.domains.Estado;
 import com.siderbit.ephemeris.domains.Hora;
-import com.siderbit.ephemeris.domains.Medico;
-import com.siderbit.ephemeris.domains.Paciente;
 import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.domains.Usuario;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
@@ -66,8 +64,8 @@ public class EphemerisApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Usuario paci1 = new Paciente(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", "123458216", sdf.parse("20/02/2021 00:00"), sdf.parse("14/05/1959 00:00"));
-		paci1.getTelefones().addAll(Arrays.asList("118986745"));
+		Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 00:00"));
+		usu1.getTelefones().addAll(Arrays.asList("118986745"));
 		
 		Especialidade esp1 = new Especialidade(null, "Dentista");
 		Especialidade esp2 = new Especialidade(null, "Clínico Geral");
@@ -78,20 +76,20 @@ public class EphemerisApplication implements CommandLineRunner {
 		Especialidade esp7 = new Especialidade(null, "Cirurgial Geral");		
 		
 		
-		Medico medi1 = new Medico(null, "Médico Ephemeris", "m.ephemeris@gmail.com", "743678216", sdf.parse("21/02/2021 00:00"),"456356",sdf.parse("20/02/2021 00:00"));
-		paci1.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
+		Usuario usu2 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", sdf.parse("21/02/2021 00:00"));
+		usu2.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
 		
-		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",paci1,c3);
-		Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",medi1,c2);
+		Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",usu1,c3);
+		Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",usu2,c2);
 		
 		especialidadeRepository.saveAll(Arrays.asList(esp1, esp2, esp3, esp4, esp5, esp6, esp7));
-		paci1.getEnderecos().addAll(Arrays.asList(e1));
-		medi1.getEnderecos().addAll(Arrays.asList(e2));
+		usu1.getEnderecos().addAll(Arrays.asList(e1));
+		usu2.getEnderecos().addAll(Arrays.asList(e2));
 		
-		medi1.getEspecialidades().add(esp3);
-		medi1.getEspecialidades().add(esp2);
+//		usu2.getEspecialidades().add(esp3);
+//		usu2.getEspecialidades().add(esp2);
 		
-		usuarioRepository.saveAll(Arrays.asList(paci1, medi1));
+		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
 		

@@ -36,8 +36,13 @@ public class EspecialidadeService {
 	}
 
 	public Especialidade update(Especialidade obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Especialidade newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	private void updateData(Especialidade newObj, Especialidade obj) {
+		newObj.setNome(obj.getNome());		
 	}
 
 	public void delete(Integer id) {
