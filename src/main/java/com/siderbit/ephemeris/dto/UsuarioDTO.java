@@ -10,7 +10,9 @@ import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.siderbit.ephemeris.domains.Usuario;
+import com.siderbit.ephemeris.services.validation.UsuarioUpdate;
 
+@UsuarioUpdate
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
