@@ -27,13 +27,13 @@ import com.siderbit.ephemeris.repositories.UsuarioRepository;
 public class EphemerisApplication implements CommandLineRunner {
 	
 	@Autowired
-	EstadoRepository estadoRepository;	
+	private EstadoRepository estadoRepository;	
 	@Autowired
-	HoraRepository horaRepository;
+	private HoraRepository horaRepository;
 	@Autowired
-	TipoConsultaRepository tipoConsultaRepository;
+	private TipoConsultaRepository tipoConsultaRepository;
 	@Autowired
-	CidadeRepository cidadeRepository;
+	private CidadeRepository cidadeRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired

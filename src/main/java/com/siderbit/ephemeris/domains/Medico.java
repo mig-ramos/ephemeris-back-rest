@@ -1,10 +1,14 @@
 package com.siderbit.ephemeris.domains;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -12,9 +16,13 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Medico extends Usuario {
+public class Medico implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
 	private String crm;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
@@ -26,11 +34,12 @@ public class Medico extends Usuario {
 	
 	public Medico() {
 	}
-
-	public Medico(String crm, Date dataInscricao) {
+	
+	public Medico(Integer id, String crm, Date dataInscricao) {
 		super();
+		this.id = id;
 		this.crm = crm;
-		this.dataInscricao = dataInscricao;
+		this.dataInscricao = dataInscricao;	
 	}
 
 	public String getCrm() {
@@ -43,10 +52,6 @@ public class Medico extends Usuario {
 
 	public Date getDataInscricao() {
 		return dataInscricao;
-	}
-
-	public void setDataInscricao(Date dataInscricao) {
-		this.dataInscricao = dataInscricao;
 	}
 
 	public Set<Especialidade> getEspecialidades() {
