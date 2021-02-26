@@ -13,6 +13,8 @@ import com.siderbit.ephemeris.domains.Endereco;
 import com.siderbit.ephemeris.domains.Especialidade;
 import com.siderbit.ephemeris.domains.Estado;
 import com.siderbit.ephemeris.domains.Hora;
+import com.siderbit.ephemeris.domains.Medico;
+import com.siderbit.ephemeris.domains.Paciente;
 import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.domains.Usuario;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
@@ -20,6 +22,8 @@ import com.siderbit.ephemeris.repositories.EnderecoRepository;
 import com.siderbit.ephemeris.repositories.EspecialidadeRepository;
 import com.siderbit.ephemeris.repositories.EstadoRepository;
 import com.siderbit.ephemeris.repositories.HoraRepository;
+import com.siderbit.ephemeris.repositories.MedicoRepository;
+import com.siderbit.ephemeris.repositories.PacienteRepository;
 import com.siderbit.ephemeris.repositories.TipoConsultaRepository;
 import com.siderbit.ephemeris.repositories.UsuarioRepository;
 
@@ -40,6 +44,10 @@ public class EphemerisApplication implements CommandLineRunner {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private EspecialidadeRepository especialidadeRepository;
+	@Autowired
+	private MedicoRepository medicoRepository;
+	@Autowired
+	private PacienteRepository pacienteRepository;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -83,14 +91,24 @@ public class EphemerisApplication implements CommandLineRunner {
 		Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",usu2,c2);
 		
 		especialidadeRepository.saveAll(Arrays.asList(esp1, esp2, esp3, esp4, esp5, esp6, esp7));
+		
 		usu1.getEnderecos().addAll(Arrays.asList(e1));
 		usu2.getEnderecos().addAll(Arrays.asList(e2));
 		
-//		usu2.getEspecialidades().add(esp3);
-//		usu2.getEspecialidades().add(esp2);
+		
+		Medico med1 = new Medico("345629", sdf.parse("12/06/2001 00:00"));
+
+		
+		med1.getEspecialidades().addAll(Arrays.asList(esp2,esp3));
+		med1.setUsuario(usu2);
+
+		Paciente paci1 = new Paciente(null, sdf.parse("12/06/2001 00:00"));
+		paci1.setUsuario(usu1);
 		
 		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		medicoRepository.saveAll(Arrays.asList(med1));
+		pacienteRepository.saveAll(Arrays.asList(paci1));
 		
 		
 		

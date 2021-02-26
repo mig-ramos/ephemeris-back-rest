@@ -3,10 +3,13 @@ package com.siderbit.ephemeris.domains;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,6 +23,10 @@ public class Paciente implements Serializable{
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataNascimento;
+	
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
 	public Paciente() {
 	}
@@ -44,5 +51,13 @@ public class Paciente implements Serializable{
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}	
 }
