@@ -39,11 +39,11 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), null);
+		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
 	}
 
 	public Usuario fromDTO(@Valid UsuarioNewDTO objDto) {
-		Usuario usu = new Usuario(null, objDto.getNome(), objDto.getEmail(), null);
+		Usuario usu = new Usuario(null, objDto.getNome(), objDto.getEmail(), null, null);
 		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
 		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), usu, cid);
 		usu.getEnderecos().add(end);
