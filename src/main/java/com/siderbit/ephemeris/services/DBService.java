@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.siderbit.ephemeris.domains.Agenda;
 import com.siderbit.ephemeris.domains.Cidade;
 import com.siderbit.ephemeris.domains.Endereco;
 import com.siderbit.ephemeris.domains.Especialidade;
@@ -16,6 +17,7 @@ import com.siderbit.ephemeris.domains.Medico;
 import com.siderbit.ephemeris.domains.Paciente;
 import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.domains.Usuario;
+import com.siderbit.ephemeris.repositories.AgendaRepository;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
 import com.siderbit.ephemeris.repositories.EnderecoRepository;
 import com.siderbit.ephemeris.repositories.EspecialidadeRepository;
@@ -47,6 +49,8 @@ public class DBService {
 	private MedicoRepository medicoRepository;
 	@Autowired
 	private PacienteRepository pacienteRepository;
+	@Autowired
+	private AgendaRepository agendaRepository;
 	
 	public void instantiateTestDatabase() throws ParseException {
 	
@@ -134,5 +138,9 @@ public class DBService {
 			hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21));
 	
 	tipoConsultaRepository.saveAll(Arrays.asList(tipoCon1, tipoCon2));
-	}
+	
+	Agenda age1 = new Agenda(null, esp3, med1, paci1, sdf.parse("26/02/2021 00:00"), hr1, tipoCon1, sdf.parse("20/02/2021 00:00"));
+	
+	agendaRepository.saveAll(Arrays.asList(age1));
+	}	
 }

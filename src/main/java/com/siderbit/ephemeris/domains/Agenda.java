@@ -1,7 +1,6 @@
 package com.siderbit.ephemeris.domains;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,9 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -38,8 +34,8 @@ public class Agenda implements Serializable {
 	private Paciente paciente;
 	
 	@Column(name="data_agendamento")
-	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate dataAgendamento;
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private Date dataAgendamento;
 	
 	@ManyToOne
 	@JoinColumn(name="horario_id")
@@ -55,7 +51,7 @@ public class Agenda implements Serializable {
 	public Agenda() {
 	}
 
-	public Agenda(Integer id, Especialidade especialidade, Medico medico, Paciente paciente, LocalDate dataAgendamento,
+	public Agenda(Integer id, Especialidade especialidade, Medico medico, Paciente paciente, Date dataAgendamento,
 			Hora hora, TipoConsulta tipoConsulta, Date instante) {
 		super();
 		this.id = id;
@@ -100,11 +96,11 @@ public class Agenda implements Serializable {
 		this.paciente = paciente;
 	}
 
-	public LocalDate getDataAgendamento() {
+	public Date getDataAgendamento() {
 		return dataAgendamento;
 	}
 
-	public void setDataAgendamento(LocalDate dataAgendamento) {
+	public void setDataAgendamento(Date dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
 	}
 
