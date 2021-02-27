@@ -56,9 +56,33 @@ public class DBService {
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-	Estado est1 = new Estado(null, "São Paulo");
-	Estado est2 = new Estado(null, "Minas Gerais");
-	Estado est3 = new Estado(null, "Paraná");
+	Estado est1 = new Estado(null, "Acre");
+	Estado est2 = new Estado(null, "Alagoas");
+	Estado est3 = new Estado(null, "Amapá");
+	Estado est4 = new Estado(null, "Amazonas");
+	Estado est5 = new Estado(null, "Bahia");
+	Estado est6 = new Estado(null, "Ceará");
+	Estado est7 = new Estado(null, "Distrito Federal");
+	Estado est8 = new Estado(null, "Espírito Santo");
+	Estado est9 = new Estado(null, "Goiás");
+	Estado est10 = new Estado(null, "Maranhão");
+	Estado est11 = new Estado(null, "Mato Grosso");
+	Estado est12 = new Estado(null, "Mato Grosso do Sul");
+	Estado est13 = new Estado(null, "Minas Gerais");
+	Estado est14 = new Estado(null, "Pará");
+	Estado est15 = new Estado(null, "Paraíba");
+	Estado est16 = new Estado(null, "Paraná");
+	Estado est17 = new Estado(null, "Pernambuco");
+	Estado est18 = new Estado(null, "Piauí");
+	Estado est19 = new Estado(null, "Rio de Janeiro");
+	Estado est20 = new Estado(null, "Rio Grande do Norte");
+	Estado est21 = new Estado(null, "Rio Grande do Sul");
+	Estado est22 = new Estado(null, "Rondônia");
+	Estado est23 = new Estado(null, "Roraima");
+	Estado est24 = new Estado(null, "Santa Catarina");
+	Estado est25 = new Estado(null, "São Paulo");
+	Estado est26 = new Estado(null, "Sergipe");
+	Estado est27 = new Estado(null, "Tocantins");
 	
 	Cidade c1 = new Cidade(null, "Apucarana",est3);
 	Cidade c2 = new Cidade(null, "Santos",est1);
@@ -67,7 +91,9 @@ public class DBService {
 	est1.getCidades().addAll(Arrays.asList(c2,c3));
 	est2.getCidades().addAll(Arrays.asList(c3));
 	
-	estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
+	estadoRepository.saveAll(Arrays.asList(est1, est2, est3, est4, est5, est6, est7, est8, 
+			est9, est10, est11, est12, est13, est14, est15, est16, est17, est18, est19, est20,
+			est21, est22, est23, est24, est25, est26, est27));
 	cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	
 	Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 00:00"));
@@ -101,6 +127,8 @@ public class DBService {
 	med1.setUsuario(usu2);
 
 	Paciente paci1 = new Paciente(null, sdf.parse("12/06/2001 00:00"));
+	
+	
 	paci1.setUsuario(usu1);
 	
 	usuarioRepository.saveAll(Arrays.asList(usu1, usu2));

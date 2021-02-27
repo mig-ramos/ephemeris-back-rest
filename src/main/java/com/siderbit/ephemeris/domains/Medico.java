@@ -39,12 +39,20 @@ public class Medico implements Serializable{
 	private Usuario usuario;
 	
 	public Medico() {
-	}
+	}	
 	
 	public Medico(String crm, Date dataInscricao) {
 		super();
 		this.crm = crm;
 		this.dataInscricao = dataInscricao;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCrm() {
@@ -66,7 +74,7 @@ public class Medico implements Serializable{
 	public Set<Especialidade> getEspecialidades() {
 		return especialidades;
 	}
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -98,5 +106,5 @@ public class Medico implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 }

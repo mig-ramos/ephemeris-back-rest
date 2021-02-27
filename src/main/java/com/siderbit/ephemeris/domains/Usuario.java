@@ -34,7 +34,6 @@ public class Usuario implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
-	// DELETAR os enderecos em CASCATA
 	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 

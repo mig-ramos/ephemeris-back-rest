@@ -14,26 +14,26 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Paciente implements Serializable{
+public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@JsonFormat(pattern="dd/MM/yyyy")
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
-	
+
 	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
-	
+
 	public Paciente() {
 	}
-	
+
 	public Paciente(Integer id, Date dataNascimento) {
 		super();
-		this.id = id;
+//		this.id = id;
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -52,7 +52,7 @@ public class Paciente implements Serializable{
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -84,5 +84,5 @@ public class Paciente implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 }
