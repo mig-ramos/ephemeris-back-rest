@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Confirmação de cadastro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div>
+<h1>
+Cadastro número: <span th:text="${usuario.id}"> </span>
+</h1>
+<p>
+Instante: <span
+th:text="${#dates.format(usuario.instante, 'dd/MM/yyyy hh:mm')}"></span>
+</p>
+<p>
+Cliente: <span th:text="${usuario.nome}"></span>
+</p>
+</div>
+</body>
+</html>

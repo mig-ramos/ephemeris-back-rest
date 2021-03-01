@@ -95,7 +95,8 @@ public class UsuarioService {
 		obj = repo.save(obj);
 		enderecoRepository.saveAll(obj.getEnderecos());
 //		System.out.println(obj);
-		emailService.sendCadastroConfirmationEmail(obj);
+//		emailService.sendUsuarioConfirmationEmail(obj);
+		emailService.sendUsuarioConfirmationHtmlEmail(obj);
 		return obj;
 	}
 }
