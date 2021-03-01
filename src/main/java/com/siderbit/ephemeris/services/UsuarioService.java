@@ -32,8 +32,8 @@ public class UsuarioService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-//	@Autowired
-//	private EmailService emailService;
+	@Autowired
+	private EmailService emailService;
 
 	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
@@ -94,7 +94,8 @@ public class UsuarioService {
 		obj.setId(null);
 		obj = repo.save(obj);
 		enderecoRepository.saveAll(obj.getEnderecos());
-		System.out.println(obj);
+//		System.out.println(obj);
+		emailService.sendCadastroConfirmationEmail(obj);
 		return obj;
 	}
 }
