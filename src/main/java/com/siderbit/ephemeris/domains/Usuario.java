@@ -1,6 +1,7 @@
 package com.siderbit.ephemeris.domains;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -137,4 +138,20 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		StringBuilder builder = new StringBuilder();
+		builder.append("Usuario nome: ");
+		builder.append(getNome());
+		builder.append(", email: ");
+		builder.append(getEmail());
+		builder.append(", instante: ");
+		builder.append(sdf.format(getInstante()));
+		builder.append("\n");
+		return builder.toString();
+	}
+	
+	
 }

@@ -31,6 +31,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+//	@Autowired
+//	private EmailService emailService;
 
 	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
@@ -43,7 +46,7 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(@Valid UsuarioNewDTO objDto) {
-		Usuario usu = new Usuario(null, objDto.getNome(), objDto.getEmail(), null, null);
+		Usuario usu = new Usuario(null, objDto.getNome(), objDto.getEmail(), objDto.getInstante(), null);
 		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
 		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), usu, cid);
 		usu.getEnderecos().add(end);
@@ -91,6 +94,7 @@ public class UsuarioService {
 		obj.setId(null);
 		obj = repo.save(obj);
 		enderecoRepository.saveAll(obj.getEnderecos());
+		System.out.println(obj);
 		return obj;
 	}
 }

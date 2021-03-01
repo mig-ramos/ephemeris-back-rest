@@ -1,12 +1,14 @@
 package com.siderbit.ephemeris.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.siderbit.ephemeris.services.validation.UsuarioInsert;
 
 @UsuarioInsert
@@ -20,6 +22,9 @@ public class UsuarioNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Email(message="Email inválido")
 	private String email;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private Date instante;
 
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
@@ -60,6 +65,14 @@ public class UsuarioNewDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getInstante() {
+		return instante;
+	}
+
+	public void setInstante(Date instante) {
+		this.instante = instante;
 	}
 
 	public String getLogradouro() {
