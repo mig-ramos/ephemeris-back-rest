@@ -2,7 +2,7 @@ package com.siderbit.ephemeris.domains.enums;
 
 public enum Perfil {
 	// ROLER_ADMIN - exigencia do spring security
-	ADMIN(1, "ROLER_ADMIN"),
+	ADMIN(1, "ROLE_ADMIN"),
 	MEDICO(2, "ROLE_MEDICO"),
 	USUARIO(3, "ROLE_USUARIO");
 
