@@ -17,10 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.siderbit.ephemeris.domains.Cidade;
 import com.siderbit.ephemeris.domains.Endereco;
 import com.siderbit.ephemeris.domains.Usuario;
+import com.siderbit.ephemeris.domains.enums.Perfil;
 import com.siderbit.ephemeris.dto.UsuarioDTO;
 import com.siderbit.ephemeris.dto.UsuarioNewDTO;
 import com.siderbit.ephemeris.repositories.EnderecoRepository;
 import com.siderbit.ephemeris.repositories.UsuarioRepository;
+import com.siderbit.ephemeris.security.UserSS;
+import com.siderbit.ephemeris.services.exceptions.AuthorizationException;
 import com.siderbit.ephemeris.services.exceptions.DataIntegrityException;
 import com.siderbit.ephemeris.services.exceptions.ObjectNotFoundException;
 
@@ -40,6 +43,12 @@ public class UsuarioService {
 	private EmailService emailService;
 
 	public Usuario find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
