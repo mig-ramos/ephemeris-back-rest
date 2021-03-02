@@ -25,6 +25,9 @@ public class UsuarioNewDTO implements Serializable {
 	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String senha;
 
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
@@ -73,6 +76,14 @@ public class UsuarioNewDTO implements Serializable {
 
 	public void setInstante(Date instante) {
 		this.instante = instante;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getLogradouro() {

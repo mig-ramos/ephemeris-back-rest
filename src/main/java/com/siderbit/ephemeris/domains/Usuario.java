@@ -36,6 +36,7 @@ public class Usuario implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
+	// Para nao aparecer no json qdo recuperr um Usuario
 	@JsonIgnore
 	private String senha;
 	

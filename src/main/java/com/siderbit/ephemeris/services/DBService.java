@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.siderbit.ephemeris.domains.Agenda;
@@ -31,6 +32,9 @@ import com.siderbit.ephemeris.repositories.UsuarioRepository;
 @Service
 public class DBService {
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private EstadoRepository estadoRepository;	
 	@Autowired
@@ -96,7 +100,7 @@ public class DBService {
 			est21, est22, est23, est24, est25, est26, est27));
 	cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	
-	Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"),"123");
+	Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"), pe.encode("123"));
 	usu1.getTelefones().addAll(Arrays.asList("118986745"));
 	
 	Especialidade esp1 = new Especialidade(null, "Dentista");
@@ -108,7 +112,7 @@ public class DBService {
 	Especialidade esp7 = new Especialidade(null, "Cirurgial Geral");		
 	
 	
-	Usuario usu2 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", sdf.parse("21/02/2021 08:00"), "123");
+	Usuario usu2 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", sdf.parse("21/02/2021 08:00"), pe.encode("123"));
 	usu2.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
 	
 	Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",usu1,c3);

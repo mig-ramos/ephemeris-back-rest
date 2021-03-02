@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ import com.siderbit.ephemeris.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Autowired
 	private UsuarioRepository repo;
@@ -46,7 +50,7 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(@Valid UsuarioNewDTO objDto) {
-		Usuario usu = new Usuario(null, objDto.getNome(), objDto.getEmail(), objDto.getInstante(), null);
+		Usuario usu = new Usuario(null, objDto.getNome(), objDto.getEmail(), objDto.getInstante(), pe.encode(objDto.getSenha()));
 		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
 		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), usu, cid);
 		usu.getEnderecos().add(end);
