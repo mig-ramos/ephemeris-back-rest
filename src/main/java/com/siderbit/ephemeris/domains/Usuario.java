@@ -7,12 +7,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.siderbit.ephemeris.domains.enums.Perfil;
 
 @Entity
 public class Usuario implements Serializable {
@@ -47,7 +50,12 @@ public class Usuario implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
 	public Usuario() {
+		addPerfil(Perfil.USUARIO);
 	}
 
 	public Usuario(Integer id, String nome, String email, Date instante, String senha) {
@@ -57,6 +65,7 @@ public class Usuario implements Serializable {
 		this.email = email;
 		this.instante = instante;
 		this.senha = senha;
+		addPerfil(Perfil.USUARIO);
 	}
 
 	public Integer getId() {
@@ -99,6 +108,15 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
+	public Set<Perfil> getPerfis(){
+		// Um Lambda
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil(Perfil perfil){
+		perfis.add(perfil.getCod());
+	}
+	
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}

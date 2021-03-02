@@ -18,6 +18,7 @@ import com.siderbit.ephemeris.domains.Medico;
 import com.siderbit.ephemeris.domains.Paciente;
 import com.siderbit.ephemeris.domains.TipoConsulta;
 import com.siderbit.ephemeris.domains.Usuario;
+import com.siderbit.ephemeris.domains.enums.Perfil;
 import com.siderbit.ephemeris.repositories.AgendaRepository;
 import com.siderbit.ephemeris.repositories.CidadeRepository;
 import com.siderbit.ephemeris.repositories.EnderecoRepository;
@@ -88,9 +89,9 @@ public class DBService {
 	Estado est26 = new Estado(null, "Sergipe");
 	Estado est27 = new Estado(null, "Tocantins");
 	
-	Cidade c1 = new Cidade(null, "Apucarana",est3);
-	Cidade c2 = new Cidade(null, "Santos",est1);
-	Cidade c3 = new Cidade(null, "São Vicente",est1);
+	Cidade c1 = new Cidade(null, "Apucarana",est16);
+	Cidade c2 = new Cidade(null, "Santos",est25);
+	Cidade c3 = new Cidade(null, "São Vicente",est25);
 	
 	est1.getCidades().addAll(Arrays.asList(c2,c3));
 	est2.getCidades().addAll(Arrays.asList(c3));
@@ -100,8 +101,9 @@ public class DBService {
 			est21, est22, est23, est24, est25, est26, est27));
 	cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	
-	Usuario usu1 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"), pe.encode("123"));
-	usu1.getTelefones().addAll(Arrays.asList("118986745"));
+	Usuario usu1 = new Usuario(null, "Admin Ephemeris", "adm.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"), pe.encode("123"));
+	usu1.getTelefones().addAll(Arrays.asList("118986664"));
+	usu1.addPerfil(Perfil.ADMIN);
 	
 	Especialidade esp1 = new Especialidade(null, "Dentista");
 	Especialidade esp2 = new Especialidade(null, "Clínico Geral");
@@ -112,31 +114,37 @@ public class DBService {
 	Especialidade esp7 = new Especialidade(null, "Cirurgial Geral");		
 	
 	
-	Usuario usu2 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", sdf.parse("21/02/2021 08:00"), pe.encode("123"));
-	usu2.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
+	Usuario usu2 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"), pe.encode("123"));
+	usu2.getTelefones().addAll(Arrays.asList("858576745", "19991356880"));
+	
+	Usuario usu3 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", sdf.parse("21/02/2021 08:00"), pe.encode("123"));
+	usu3.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
+	usu3.addPerfil(Perfil.MEDICO);
 	
 	Endereco e1 = new Endereco(null,"Rua Valentin","389","casa","Vl Cascatinha","34567001",usu1,c3);
 	Endereco e2 = new Endereco(null,"Rua Catarina","34","Ap 33","Vl Andorinha","11100010",usu2,c2);
+	Endereco e3 = new Endereco(null,"Rua Caiamoré","456","casa","Vl Mirim","11200010",usu3,c1);
 	
 	especialidadeRepository.saveAll(Arrays.asList(esp1, esp2, esp3, esp4, esp5, esp6, esp7));
 	
 	usu1.getEnderecos().addAll(Arrays.asList(e1));
 	usu2.getEnderecos().addAll(Arrays.asList(e2));
+	usu3.getEnderecos().addAll(Arrays.asList(e3));
 	
 	
 	Medico med1 = new Medico("345629", sdf.parse("12/06/2001 00:00"));
 
 	
 	med1.getEspecialidades().addAll(Arrays.asList(esp2,esp3));
-	med1.setUsuario(usu2);
+	med1.setUsuario(usu3);
 
 	Paciente paci1 = new Paciente(null, sdf.parse("12/06/2001 00:00"));
 	
 	
-	paci1.setUsuario(usu1);
+	paci1.setUsuario(usu2);
 	
-	usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
-	enderecoRepository.saveAll(Arrays.asList(e1,e2));
+	usuarioRepository.saveAll(Arrays.asList(usu1, usu2, usu3));
+	enderecoRepository.saveAll(Arrays.asList(e1,e2,e3));
 	medicoRepository.saveAll(Arrays.asList(med1));
 	pacienteRepository.saveAll(Arrays.asList(paci1));	
 	
