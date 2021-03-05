@@ -14,6 +14,7 @@ public class TipoConsulta implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String tipoConsulta;
 	
 	public TipoConsulta() {
