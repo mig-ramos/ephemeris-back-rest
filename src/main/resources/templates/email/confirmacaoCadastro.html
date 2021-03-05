@@ -9,10 +9,10 @@
 <h1>
 Cadastro número: <span th:text="${usuario.id}"> </span>
 </h1>
-<p>
+<p>  
 Instante: <span
-th:text="${#dates.format(usuario.instante, 'dd/MM/yyyy hh:mm')}"></span>
-</p>
+th:text="${usuario.instante}"></span> 
+</p> 
 <p>
 Cliente: <span th:text="${usuario.nome}"></span>
 </p>

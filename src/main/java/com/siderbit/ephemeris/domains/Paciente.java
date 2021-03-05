@@ -1,9 +1,10 @@
 package com.siderbit.ephemeris.domains;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Paciente implements Serializable {
@@ -21,19 +23,20 @@ public class Paciente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascimento;
+	@Column(name = "data_nascimento", nullable = false)
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataNascimento;
 
 	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name="usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 	public Paciente() {
 	}
 
-	public Paciente(Integer id, Date dataNascimento) {
+	public Paciente(Integer id, LocalDate dataNascimento) {
 		super();
-//		this.id = id;
+		this.id = id;
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -45,14 +48,14 @@ public class Paciente implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

@@ -20,7 +20,7 @@ public abstract class AbstractEmailService implements EmailService {
 	@Value("${default.sender}")
 	private String sender;
 
-	// Uma instancia do templateengine
+	// Uma instancia do template engine
 	@Autowired
 	private TemplateEngine templateEngine;
 
@@ -43,6 +43,7 @@ public abstract class AbstractEmailService implements EmailService {
 		return sm;
 	}
 
+	// TRABALHANDO COM O TEMPLATE THYMELEAF
 	protected String htmlFromTemplateUsuario(Usuario obj) {
 		// Para acessar o template
 		Context context = new Context();

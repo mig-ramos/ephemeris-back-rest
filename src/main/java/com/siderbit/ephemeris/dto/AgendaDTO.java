@@ -1,69 +1,52 @@
-package com.siderbit.ephemeris.domains;
+package com.siderbit.ephemeris.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-@Entity
-public class Agenda implements Serializable {
+import com.siderbit.ephemeris.domains.Agenda;
+import com.siderbit.ephemeris.domains.Especialidade;
+import com.siderbit.ephemeris.domains.Hora;
+import com.siderbit.ephemeris.domains.Medico;
+import com.siderbit.ephemeris.domains.Paciente;
+import com.siderbit.ephemeris.domains.TipoConsulta;
+
+public class AgendaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
-	@ManyToOne
-	@JoinColumn(name="especialidade_id")
+
 	private Especialidade especialidade;
-	
-	@ManyToOne
-	@JoinColumn(name="medico_id")
+
 	private Medico medico;
-	
-	@ManyToOne
-	@JoinColumn(name="paciente_id")
+
 	private Paciente paciente;
-	
-	@Column(name="data_agendamento")
+
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataAgendamento;
-	
-	@ManyToOne
-	@JoinColumn(name="horario_id")
+
 	private Hora hora;
-	
-	@ManyToOne
-	@JoinColumn(name="tipo_id")
+
 	private TipoConsulta tipoConsulta;
-	
+
 	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime instante;
 
-	public Agenda() {
+	public AgendaDTO() {
 	}
 
-	public Agenda(Integer id, Especialidade especialidade, Medico medico, Paciente paciente, LocalDate dataAgendamento,
-			Hora hora, TipoConsulta tipoConsulta, LocalDateTime instante) {
-		super();
-		this.id = id;
-		this.especialidade = especialidade;
-		this.medico = medico;
-		this.paciente = paciente;
-		this.dataAgendamento = dataAgendamento;
-		this.hora = hora;
-		this.tipoConsulta = tipoConsulta;
-		this.instante = instante;
+	public AgendaDTO(Agenda obj) {
+		id = obj.getId();
+		especialidade = obj.getEspecialidade();
+		medico = obj.getMedico();
+		paciente = obj.getPaciente();
+		dataAgendamento = obj.getDataAgendamento();
+		hora = obj.getHora();
+		tipoConsulta = obj.getTipoConsulta();
+		instante = obj.getInstante();
 	}
 
 	public Integer getId() {
@@ -112,7 +95,7 @@ public class Agenda implements Serializable {
 
 	public void setHora(Hora hora) {
 		this.hora = hora;
-	}	
+	}
 
 	public TipoConsulta getTipoConsulta() {
 		return tipoConsulta;
@@ -128,30 +111,5 @@ public class Agenda implements Serializable {
 
 	public void setInstante(LocalDateTime instante) {
 		this.instante = instante;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Agenda other = (Agenda) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 }

@@ -8,6 +8,7 @@ import com.siderbit.ephemeris.domains.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+	
 	@Transactional(readOnly=true)
 	Usuario findByEmail(String email);
 }

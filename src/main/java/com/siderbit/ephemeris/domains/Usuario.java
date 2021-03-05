@@ -1,9 +1,10 @@
 package com.siderbit.ephemeris.domains;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +21,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.siderbit.ephemeris.domains.enums.Perfil;
 
@@ -31,13 +34,14 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
 	
+	private String nome;
+		
 	@Column(unique=true)
 	private String email;
 		
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date instante;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private LocalDateTime instante;
 	
 	// Para nao aparecer no json qdo recuperr um Usuario
 	@JsonIgnore
@@ -58,7 +62,7 @@ public class Usuario implements Serializable {
 		addPerfil(Perfil.USUARIO);
 	}
 
-	public Usuario(Integer id, String nome, String email, Date instante, String senha) {
+	public Usuario(Integer id, String nome, String email, LocalDateTime instante, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -75,7 +79,7 @@ public class Usuario implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -92,11 +96,11 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public Date getInstante() {
+	public LocalDateTime getInstante() {
 		return instante;
 	}
 
-	public void setInstante(Date instante) {
+	public void setInstante(LocalDateTime instante) {
 		this.instante = instante;
 	}
 
@@ -160,14 +164,15 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime dataHoraSP = LocalDateTime
+				   .ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
 		StringBuilder builder = new StringBuilder();
-		builder.append("Usuario nome: ");
-		builder.append(getNome());
 		builder.append(", email: ");
 		builder.append(getEmail());
 		builder.append(", instante: ");
-		builder.append(sdf.format(getInstante()));
+//		builder.append(sdf.format(getInstante()));
+		builder.append(dataHoraSP);
 		builder.append("\n");
 		return builder.toString();
 	}

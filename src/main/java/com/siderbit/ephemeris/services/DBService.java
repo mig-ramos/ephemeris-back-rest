@@ -1,7 +1,9 @@
 package com.siderbit.ephemeris.services;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,6 @@ public class DBService {
 	
 	public void instantiateTestDatabase() throws ParseException {
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	Estado est1 = new Estado(null, "Acre");
 	Estado est2 = new Estado(null, "Alagoas");
@@ -101,7 +102,7 @@ public class DBService {
 			est21, est22, est23, est24, est25, est26, est27));
 	cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	
-	Usuario usu1 = new Usuario(null, "Admin Ephemeris", "adm.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"), pe.encode("123"));
+	Usuario usu1 = new Usuario(null, "Administrador Ephemeris", "adm.ephemeris@gmail.com", LocalDateTime.parse("2021-02-20T00:00"), pe.encode("123"));
 	usu1.getTelefones().addAll(Arrays.asList("118986664"));
 	usu1.addPerfil(Perfil.ADMIN);
 	
@@ -114,10 +115,10 @@ public class DBService {
 	Especialidade esp7 = new Especialidade(null, "Cirurgial Geral");		
 	
 	
-	Usuario usu2 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", sdf.parse("20/02/2021 07:00"), pe.encode("123"));
+	Usuario usu2 = new Usuario(null, "Paciente Ephemeris", "p.ephemeris@gmail.com", LocalDateTime.parse("2021-02-20T00:00"), pe.encode("123"));
 	usu2.getTelefones().addAll(Arrays.asList("858576745", "19991356880"));
 	
-	Usuario usu3 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", sdf.parse("21/02/2021 08:00"), pe.encode("123"));
+	Usuario usu3 = new Usuario(null, "Médico Ephemeris", "m.ephemeris@gmail.com", LocalDateTime.parse("2021-02-21T00:00"), pe.encode("123"));
 	usu3.getTelefones().addAll(Arrays.asList("858986745", "19991356754"));
 	usu3.addPerfil(Perfil.MEDICO);
 	
@@ -131,14 +132,14 @@ public class DBService {
 	usu2.getEnderecos().addAll(Arrays.asList(e2));
 	usu3.getEnderecos().addAll(Arrays.asList(e3));
 	
-	
-	Medico med1 = new Medico("345629", sdf.parse("12/06/2001 00:00"));
+	Medico med1 = new Medico(null, "345629", LocalDate.parse("2001-02-12"));
 
 	
 	med1.getEspecialidades().addAll(Arrays.asList(esp2,esp3));
 	med1.setUsuario(usu3);
+	
 
-	Paciente paci1 = new Paciente(null, sdf.parse("12/06/2001 00:00"));
+	Paciente paci1 = new Paciente(null, LocalDate.parse("1970-02-23"));
 	
 	
 	paci1.setUsuario(usu2);
@@ -149,38 +150,37 @@ public class DBService {
 	pacienteRepository.saveAll(Arrays.asList(paci1));	
 	
 	
-	Hora hr1 = new Hora(null, "07:00");
-	Hora hr2 = new Hora(null, "07:30");
-	Hora hr3 = new Hora(null, "08:00");
-	Hora hr4 = new Hora(null, "08:30");
-	Hora hr5 = new Hora(null, "09:00");
-	Hora hr6 = new Hora(null, "09:30");
-	Hora hr7 = new Hora(null, "10:00");
-	Hora hr8 = new Hora(null, "10:30");
-	Hora hr9 = new Hora(null, "11:00");
-	Hora hr10 = new Hora(null, "11:30");
-	Hora hr11 = new Hora(null, "12:00");
-	Hora hr12 = new Hora(null, "12:30");
-	Hora hr13 = new Hora(null, "13:00");
-	Hora hr14 = new Hora(null, "13:30");
-	Hora hr15 = new Hora(null, "14:00");
-	Hora hr16 = new Hora(null, "14:30");
-	Hora hr17 = new Hora(null, "15:00");
-	Hora hr18 = new Hora(null, "15:30");
-	Hora hr19 = new Hora(null, "16:00");
-	Hora hr20 = new Hora(null, "16:30");		
-	Hora hr21 = new Hora(null, "17:00");
+	Hora hr1 = new Hora(null, LocalTime.parse("07:00"));
+	Hora hr2 = new Hora(null, LocalTime.parse("07:30"));
+	Hora hr3 = new Hora(null, LocalTime.parse("08:00"));
+	Hora hr4 = new Hora(null, LocalTime.parse("08:30"));
+	Hora hr5 = new Hora(null, LocalTime.parse("09:00"));
+	Hora hr6 = new Hora(null, LocalTime.parse("09:30"));
+	Hora hr7 = new Hora(null, LocalTime.parse("10:00"));
+	Hora hr8 = new Hora(null, LocalTime.parse("10:30"));
+	Hora hr9 = new Hora(null, LocalTime.parse("11:00"));
+	Hora hr10 = new Hora(null, LocalTime.parse("11:30"));
+	Hora hr11 = new Hora(null, LocalTime.parse("12:00"));
+	Hora hr12 = new Hora(null, LocalTime.parse("13:00"));
+	Hora hr13 = new Hora(null, LocalTime.parse("13:30"));
+	Hora hr14 = new Hora(null, LocalTime.parse("14:00"));
+	Hora hr15 = new Hora(null, LocalTime.parse("14:30"));
+	Hora hr16 = new Hora(null, LocalTime.parse("15:00"));
+	Hora hr17 = new Hora(null, LocalTime.parse("15:30"));
+	Hora hr18 = new Hora(null, LocalTime.parse("16:00"));
+	Hora hr19 = new Hora(null, LocalTime.parse("16:30"));
 	
 	TipoConsulta tipoCon1 = new TipoConsulta(null, "Consulta");
 	TipoConsulta tipoCon2 = new TipoConsulta(null, "Retorno");		
 			
 	horaRepository.saveAll(Arrays.asList(hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, 
-			hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21));
+			hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19));
 	
 	tipoConsultaRepository.saveAll(Arrays.asList(tipoCon1, tipoCon2));
 	
-	Agenda age1 = new Agenda(null, esp3, med1, paci1, sdf.parse("26/02/2021 00:00"), hr1, tipoCon1, sdf.parse("20/02/2021 00:00"));
+	Agenda age1 = new Agenda(null, esp3, med1, paci1, LocalDate.parse("2021-02-26"), hr1, tipoCon1, LocalDateTime.parse("2021-02-20T00:00"));
 	
 	agendaRepository.saveAll(Arrays.asList(age1));
+	
 	}	
 }

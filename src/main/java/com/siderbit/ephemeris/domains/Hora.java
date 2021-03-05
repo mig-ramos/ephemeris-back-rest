@@ -1,28 +1,35 @@
 package com.siderbit.ephemeris.domains;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 @Entity
+@Table(indexes = {@Index(name = "idx_hora_minuto", columnList = "hora_minuto")})
 public class Hora implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String hora;
+	
+	@Column(name = "hora_minuto", unique = true, nullable = false)
+	private LocalTime horaMinuto;
 	
 	public Hora() {
 	}
 
-	public Hora(Integer id, String hora) {
+	public Hora(Integer id, LocalTime horaMinuto) {
 		super();
 		this.id = id;
-		this.hora = hora;
+		this.horaMinuto = horaMinuto;
 	}
 
 	public Integer getId() {
@@ -33,12 +40,12 @@ public class Hora implements Serializable {
 		this.id = id;
 	}
 
-	public String getHora() {
-		return hora;
+	public LocalTime getHoraMinuto() {
+		return horaMinuto;
 	}
 
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setHoraMinuto(LocalTime horaMinuto) {
+		this.horaMinuto = horaMinuto;
 	}
 
 	@Override
