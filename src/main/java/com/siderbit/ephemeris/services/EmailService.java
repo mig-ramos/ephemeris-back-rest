@@ -3,11 +3,9 @@ package com.siderbit.ephemeris.services;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.stereotype.Service;
 
 import com.siderbit.ephemeris.domains.Usuario;
 
-@Service
 public interface EmailService {
 
 	//Email com texto plano
