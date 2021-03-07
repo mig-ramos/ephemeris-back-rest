@@ -17,6 +17,8 @@ import com.siderbit.ephemeris.domains.Paciente;
 import com.siderbit.ephemeris.dto.PacienteDTO;
 import com.siderbit.ephemeris.services.PacienteService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/pacientes")
 public class PacienteResource {
@@ -24,12 +26,14 @@ public class PacienteResource {
 	@Autowired
 	private PacienteService service;
 
+	@ApiOperation(value="Busca por id")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Paciente> find(@PathVariable Integer id) {
 		Paciente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
+	@ApiOperation(value="Insere paciente")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody PacienteDTO objDto) {
 		Paciente obj = service.fromDTO(objDto);
@@ -38,6 +42,7 @@ public class PacienteResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@ApiOperation(value="Altera paciente")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody PacienteDTO objDto, @PathVariable Integer id) {
 		Paciente obj = service.fromDTO(objDto);
@@ -46,6 +51,7 @@ public class PacienteResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiOperation(value="Remove paciente")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);

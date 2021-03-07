@@ -17,6 +17,8 @@ import com.siderbit.ephemeris.domains.Medico;
 import com.siderbit.ephemeris.dto.MedicoDTO;
 import com.siderbit.ephemeris.services.MedicoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/medicos")
 public class MedicoResource {
@@ -24,12 +26,14 @@ public class MedicoResource {
 	@Autowired
 	private MedicoService service;
 	
+	@ApiOperation(value="Busca por id")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Medico> find(@PathVariable Integer id) {
 		Medico obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@ApiOperation(value="Insere médico")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody MedicoDTO objDto) {
 		Medico obj = service.fromDTO(objDto);
@@ -38,6 +42,7 @@ public class MedicoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation(value="Altera médico")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody MedicoDTO objDto, @PathVariable Integer id) {
 		Medico obj = service.fromDTO(objDto);
@@ -46,6 +51,7 @@ public class MedicoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value="Remove médico")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
