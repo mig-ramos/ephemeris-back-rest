@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.siderbit.ephemeris.domains.Usuario;
 import com.siderbit.ephemeris.repositories.UsuarioRepository;
 import com.siderbit.ephemeris.services.exceptions.ObjectNotFoundException;
-
 @Service
 public class AuthService {
 
