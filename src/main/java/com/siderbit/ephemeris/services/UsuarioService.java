@@ -39,9 +39,6 @@ public class UsuarioService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-	@Autowired
-	private EmailService emailService;
-
 	public Usuario find(Integer id) {
 		
 		UserSS user = UserService.authenticated();
@@ -109,7 +106,7 @@ public class UsuarioService {
 		enderecoRepository.saveAll(obj.getEnderecos());
 //		System.out.println(obj);
 //		emailService.sendUsuarioConfirmationEmail(obj);
-		emailService.sendUsuarioConfirmationHtmlEmail(obj);
+//		emailService.sendUsuarioConfirmationHtmlEmail(obj);
 		return obj;
 	}
 }
